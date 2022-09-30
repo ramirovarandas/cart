@@ -1,0 +1,166 @@
+{
+	"info": {
+		"_postman_id": "8113ef2e-c6f1-4bd6-a85f-106a55631da5",
+		"name": "Cart-MVP",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "api",
+			"item": [
+				{
+					"name": "Insert, update or delete an item in a cart.",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"external_id\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n  \"sku\": \"100\",\n  \"name\": \"Macbook Pro 2019\",\n  \"quantity\": 1,\n  \"price\": 899\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/cart",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"cart"
+							]
+						},
+						"description": "Returns the current cart information."
+					},
+					"response": [
+						{
+							"name": "Successful response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"external_id\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n  \"sku\": \"100\",\n  \"name\": \"Macbook Pro 2019\",\n  \"quantity\": 1,\n  \"price\": 899\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/cart",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"cart"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"external_id\": \"urn:uuid:89629c6f-2578-eb7b-fd5d-ab08ddd925f7\",\n  \"total\": 92375323.9067981,\n  \"items\": [\n    {\n      \"sku\": \"100\",\n      \"name\": \"Macbook Pro 2019\",\n      \"quantity\": 1,\n      \"price\": 899\n    },\n    {\n      \"sku\": \"100\",\n      \"name\": \"Macbook Pro 2019\",\n      \"quantity\": 1,\n      \"price\": 899\n    }\n  ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Do the checkout of a cart.",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"external_id\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n  \"first_name\": \"Jane\",\n  \"last_name\": \"Doe\",\n  \"email\": \"jane.doe@example.com\",\n  \"address\": \"1234 Main St, 7B - New York - NY - 10018\",\n  \"cc_number\": \"4007000000027\",\n  \"cc_expiracy\": \"12/29\",\n  \"cc_cvv\": \"123\",\n  \"cc_name\": \"Jane Doe\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/checkout",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"checkout"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Successful response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"external_id\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n  \"first_name\": \"Jane\",\n  \"last_name\": \"Doe\",\n  \"email\": \"jane.doe@example.com\",\n  \"address\": \"1234 Main St, 7B - New York - NY - 10018\",\n  \"cc_number\": \"4007000000027\",\n  \"cc_expiracy\": \"12/29\",\n  \"cc_cvv\": \"123\",\n  \"cc_name\": \"Jane Doe\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/checkout",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"checkout"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost",
+			"type": "string"
+		}
+	]
+}

@@ -1,0 +1,176 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Cart-MVP",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http:\/\/localhost"
+        }
+    ],
+    "paths": {
+        "\/api\/cart": {
+            "post": {
+                "summary": "Insert, update or delete an item in a cart.",
+                "description": "Returns the current cart information.",
+                "requestBody": {
+                    "description": "Cart item data",
+                    "content": {
+                        "application\/json": {
+                            "schema": {
+                                "$ref": "#\/components\/schemas\/CartItem"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "external_id": {
+                                            "format": "uuid",
+                                            "type": "string"
+                                        },
+                                        "total": {
+                                            "type": "number"
+                                        },
+                                        "items": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#\/components\/schemas\/CartItemSimple"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "\/api\/checkout": {
+            "post": {
+                "summary": "Do the checkout of a cart.",
+                "requestBody": {
+                    "description": "Checkout item data",
+                    "content": {
+                        "application\/json": {
+                            "schema": {
+                                "$ref": "#\/components\/schemas\/CartCheckout"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful response"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "CartItemSimple": {
+                "type": "object",
+                "properties": {
+                    "sku": {
+                        "type": "string",
+                        "example": "100"
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Macbook Pro 2019"
+                    },
+                    "quantity": {
+                        "default": 0,
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "price": {
+                        "default": 0,
+                        "format": "float",
+                        "type": "number",
+                        "example": 899
+                    }
+                }
+            },
+            "CartItem": {
+                "type": "object",
+                "properties": {
+                    "external_id": {
+                        "format": "uuid",
+                        "type": "string",
+                        "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+                    },
+                    "sku": {
+                        "type": "string",
+                        "example": "100"
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Macbook Pro 2019"
+                    },
+                    "quantity": {
+                        "default": 0,
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "price": {
+                        "default": 0,
+                        "format": "float",
+                        "type": "number",
+                        "example": 899
+                    }
+                }
+            },
+            "CartCheckout": {
+                "type": "object",
+                "properties": {
+                    "external_id": {
+                        "format": "uuid",
+                        "type": "string",
+                        "example": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+                    },
+                    "first_name": {
+                        "type": "string",
+                        "example": "Jane"
+                    },
+                    "last_name": {
+                        "type": "string",
+                        "example": "Doe"
+                    },
+                    "email": {
+                        "type": "string",
+                        "example": "jane.doe@example.com"
+                    },
+                    "address": {
+                        "type": "string",
+                        "example": "1234 Main St, 7B - New York - NY - 10018"
+                    },
+                    "cc_number": {
+                        "type": "string",
+                        "example": "4007000000027"
+                    },
+                    "cc_expiracy": {
+                        "type": "string",
+                        "example": "12\/29"
+                    },
+                    "cc_cvv": {
+                        "type": "string",
+                        "example": "123"
+                    },
+                    "cc_name": {
+                        "type": "string",
+                        "example": "Jane Doe"
+                    }
+                }
+            }
+        }
+    }
+}
