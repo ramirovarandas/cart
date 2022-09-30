@@ -6,11 +6,31 @@ After cloning the repository, you need to go inside the directory where
 you cloned the project and run the following commands:
 
 ```shell
-composer install
+# updating the laravel sail package
+docker run --rm -u "$(id -u):$(id -g)" \
+    -v $(pwd):/var/www/html \
+    -w /var/www/html \
+    laravelsail/php81-composer:latest \
+    composer update laravel/sail
 
+# installing packages
+docker run --rm \
+    -u "$(id -u):$(id -g)" \
+    -v $(pwd):/var/www/html \
+    -w /var/www/html \
+    laravelsail/php81-composer:latest \
+    composer install --ignore-platform-reqs
+
+# creating local .env file
+cp .env.example .env
+
+# starting the containers
 # this command may take a few minutes to finish, as it needs
 # to build or download docker images
-sail up -d
+./vendor/bin/sail up -d
+
+# adding an APP_KEY
+./vendor/bin/sail artisan key:generate
 ```
 
 After running all the necessary commands, you can go to your
@@ -31,13 +51,13 @@ local Postman to test the project.
 You can run the tests using the following command:
 
 ```shell
-sail artisan test
+./vendor/bin/sail artisan test
 
 # for code coverage, your .env file must have
 # SAIL_XDEBUG_MODE=develop,debug,coverage
 # and you need to stop and start your containers
 # to view the tests results with code coverage, use this
-sail artisan test --coverage
+./vendor/bin/sail artisan test --coverage
 ```
 
 #### View OpenAPI documentation
