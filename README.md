@@ -31,6 +31,9 @@ cp .env.example .env
 
 # adding an APP_KEY
 ./vendor/bin/sail artisan key:generate
+
+# creating the database and running the migrations
+./vendor/bin/sail artisan migrate
 ```
 
 After running all the necessary commands, you can go to your
@@ -38,6 +41,18 @@ local browser at [http://localhost/](http://localhost/)
 
 > NOTE: if you need to change the port for any Docker container, please
 > adjust it inside the `docker-compose.yml` file.
+
+#### Problems running the project
+
+If you have a database connectivity issue when running the project,
+please, run the following command:
+
+```shell
+# this will stop and remove the containers and their volumes
+./vendor/bin/sail down --rmi all -v
+```
+
+After this, run the commands from the `How to run this project` step.
 
 #### Postman testing
 
